@@ -7,15 +7,15 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		C966D5151A1EDCAF00D533CB /* EntityControl.m in Sources */ = {isa = PBXBuildFile; fileRef = C966D5121A1EDCAF00D533CB /* EntityControl.m */; };
+		C966D5161A1EDCAF00D533CB /* Records.m in Sources */ = {isa = PBXBuildFile; fileRef = C966D5141A1EDCAF00D533CB /* Records.m */; };
+		C966D5191A1EDCD000D533CB /* Records.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = C966D5171A1EDCD000D533CB /* Records.xcdatamodeld */; };
 		C9AF216219C96B2600BAC331 /* RecordView.xib in Resources */ = {isa = PBXBuildFile; fileRef = C9AF216119C96B2600BAC331 /* RecordView.xib */; };
 		C9AF216519C96B9D00BAC331 /* RecordView.m in Sources */ = {isa = PBXBuildFile; fileRef = C9AF216419C96B9D00BAC331 /* RecordView.m */; };
 		C9BD444B19C80B6200B6DBDB /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C9BD444A19C80B6200B6DBDB /* AVFoundation.framework */; };
-		C9BD445B19C82F7600B6DBDB /* Records.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = C9BD445919C82F7600B6DBDB /* Records.xcdatamodeld */; };
-		C9BD445E19C8329500B6DBDB /* Records.m in Sources */ = {isa = PBXBuildFile; fileRef = C9BD445D19C8329500B6DBDB /* Records.m */; };
 		C9BD446119C833C100B6DBDB /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C9BD446019C833C100B6DBDB /* CoreData.framework */; };
 		C9BD446719C83BA100B6DBDB /* ButtonTap.wav in Resources */ = {isa = PBXBuildFile; fileRef = C9BD446519C83BA100B6DBDB /* ButtonTap.wav */; };
 		C9BD446819C83BA100B6DBDB /* game_maoudamashii_5_village10.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = C9BD446619C83BA100B6DBDB /* game_maoudamashii_5_village10.mp3 */; };
-		C9BD446B19C83C8C00B6DBDB /* EntityControl.m in Sources */ = {isa = PBXBuildFile; fileRef = C9BD446A19C83C8C00B6DBDB /* EntityControl.m */; };
 		C9EBDEDC19C69ED900D8086E /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C9EBDEDB19C69ED900D8086E /* Foundation.framework */; };
 		C9EBDEDE19C69ED900D8086E /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C9EBDEDD19C69ED900D8086E /* CoreGraphics.framework */; };
 		C9EBDEE019C69ED900D8086E /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C9EBDEDF19C69ED900D8086E /* UIKit.framework */; };
@@ -43,18 +43,18 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		C966D5111A1EDCAF00D533CB /* EntityControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EntityControl.h; path = Model/EntityControl.h; sourceTree = "<group>"; };
+		C966D5121A1EDCAF00D533CB /* EntityControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EntityControl.m; path = Model/EntityControl.m; sourceTree = "<group>"; };
+		C966D5131A1EDCAF00D533CB /* Records.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Records.h; path = Model/Records.h; sourceTree = "<group>"; };
+		C966D5141A1EDCAF00D533CB /* Records.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Records.m; path = Model/Records.m; sourceTree = "<group>"; };
+		C966D5181A1EDCD000D533CB /* Records.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Records.xcdatamodel; sourceTree = "<group>"; };
 		C9AF216119C96B2600BAC331 /* RecordView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RecordView.xib; sourceTree = "<group>"; };
 		C9AF216319C96B9D00BAC331 /* RecordView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RecordView.h; sourceTree = "<group>"; };
 		C9AF216419C96B9D00BAC331 /* RecordView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RecordView.m; sourceTree = "<group>"; };
 		C9BD444A19C80B6200B6DBDB /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
-		C9BD445A19C82F7600B6DBDB /* Records.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Records.xcdatamodel; sourceTree = "<group>"; };
-		C9BD445C19C8329500B6DBDB /* Records.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Records.h; sourceTree = "<group>"; };
-		C9BD445D19C8329500B6DBDB /* Records.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Records.m; sourceTree = "<group>"; };
 		C9BD446019C833C100B6DBDB /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		C9BD446519C83BA100B6DBDB /* ButtonTap.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = ButtonTap.wav; path = Sound/ButtonTap.wav; sourceTree = "<group>"; };
 		C9BD446619C83BA100B6DBDB /* game_maoudamashii_5_village10.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = game_maoudamashii_5_village10.mp3; path = Sound/game_maoudamashii_5_village10.mp3; sourceTree = "<group>"; };
-		C9BD446919C83C8C00B6DBDB /* EntityControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EntityControl.h; sourceTree = "<group>"; };
-		C9BD446A19C83C8C00B6DBDB /* EntityControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EntityControl.m; sourceTree = "<group>"; };
 		C9EBDED819C69ED900D8086E /* G_1A2B.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = G_1A2B.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C9EBDEDB19C69ED900D8086E /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		C9EBDEDD19C69ED900D8086E /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -114,10 +114,10 @@
 		C9BD445F19C832A500B6DBDB /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				C9BD445C19C8329500B6DBDB /* Records.h */,
-				C9BD445D19C8329500B6DBDB /* Records.m */,
-				C9BD446919C83C8C00B6DBDB /* EntityControl.h */,
-				C9BD446A19C83C8C00B6DBDB /* EntityControl.m */,
+				C966D5111A1EDCAF00D533CB /* EntityControl.h */,
+				C966D5121A1EDCAF00D533CB /* EntityControl.m */,
+				C966D5131A1EDCAF00D533CB /* Records.h */,
+				C966D5141A1EDCAF00D533CB /* Records.m */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -176,7 +176,7 @@
 		C9EBDEE219C69ED900D8086E /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				C9BD445919C82F7600B6DBDB /* Records.xcdatamodeld */,
+				C966D5171A1EDCD000D533CB /* Records.xcdatamodeld */,
 				C9EBDEE319C69ED900D8086E /* G_1A2B-Info.plist */,
 				C9EBDEE419C69ED900D8086E /* InfoPlist.strings */,
 				C9EBDEE719C69ED900D8086E /* main.m */,
@@ -306,9 +306,9 @@
 				C9EBDEF519C69ED900D8086E /* ViewController.m in Sources */,
 				C9AF216519C96B9D00BAC331 /* RecordView.m in Sources */,
 				C9EBDEEC19C69ED900D8086E /* AppDelegate.m in Sources */,
-				C9BD445B19C82F7600B6DBDB /* Records.xcdatamodeld in Sources */,
-				C9BD445E19C8329500B6DBDB /* Records.m in Sources */,
-				C9BD446B19C83C8C00B6DBDB /* EntityControl.m in Sources */,
+				C966D5191A1EDCD000D533CB /* Records.xcdatamodeld in Sources */,
+				C966D5161A1EDCAF00D533CB /* Records.m in Sources */,
+				C966D5151A1EDCAF00D533CB /* EntityControl.m in Sources */,
 				C9EBDEE819C69ED900D8086E /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -530,13 +530,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCVersionGroup section */
-		C9BD445919C82F7600B6DBDB /* Records.xcdatamodeld */ = {
+		C966D5171A1EDCD000D533CB /* Records.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
-				C9BD445A19C82F7600B6DBDB /* Records.xcdatamodel */,
+				C966D5181A1EDCD000D533CB /* Records.xcdatamodel */,
 			);
-			currentVersion = C9BD445A19C82F7600B6DBDB /* Records.xcdatamodel */;
-			path = Records.xcdatamodeld;
+			currentVersion = C966D5181A1EDCD000D533CB /* Records.xcdatamodel */;
+			name = Records.xcdatamodeld;
+			path = Model/Records.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;
 		};
