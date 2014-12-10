@@ -19,6 +19,7 @@
         // Initialization code
     }
     return self;
+    //tset2
 }
 
 - (id) initCenterPoint:(CGPoint)CenterPoint
