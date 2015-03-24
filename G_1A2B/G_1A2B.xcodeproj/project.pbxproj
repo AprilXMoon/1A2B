@@ -16,6 +16,7 @@
 		C9BD446119C833C100B6DBDB /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C9BD446019C833C100B6DBDB /* CoreData.framework */; };
 		C9BD446719C83BA100B6DBDB /* ButtonTap.wav in Resources */ = {isa = PBXBuildFile; fileRef = C9BD446519C83BA100B6DBDB /* ButtonTap.wav */; };
 		C9BD446819C83BA100B6DBDB /* game_maoudamashii_5_village10.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = C9BD446619C83BA100B6DBDB /* game_maoudamashii_5_village10.mp3 */; };
+		C9D0D0761AC1036400A7F17E /* test123.m in Sources */ = {isa = PBXBuildFile; fileRef = C9D0D0751AC1036400A7F17E /* test123.m */; };
 		C9EBDEDC19C69ED900D8086E /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C9EBDEDB19C69ED900D8086E /* Foundation.framework */; };
 		C9EBDEDE19C69ED900D8086E /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C9EBDEDD19C69ED900D8086E /* CoreGraphics.framework */; };
 		C9EBDEE019C69ED900D8086E /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C9EBDEDF19C69ED900D8086E /* UIKit.framework */; };
@@ -55,6 +56,8 @@
 		C9BD446019C833C100B6DBDB /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		C9BD446519C83BA100B6DBDB /* ButtonTap.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = ButtonTap.wav; path = Sound/ButtonTap.wav; sourceTree = "<group>"; };
 		C9BD446619C83BA100B6DBDB /* game_maoudamashii_5_village10.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = game_maoudamashii_5_village10.mp3; path = Sound/game_maoudamashii_5_village10.mp3; sourceTree = "<group>"; };
+		C9D0D0741AC1036400A7F17E /* test123.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = test123.h; path = ../test123.h; sourceTree = "<group>"; };
+		C9D0D0751AC1036400A7F17E /* test123.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = test123.m; path = ../test123.m; sourceTree = "<group>"; };
 		C9EBDED819C69ED900D8086E /* G_1A2B.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = G_1A2B.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C9EBDEDB19C69ED900D8086E /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		C9EBDEDD19C69ED900D8086E /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -165,6 +168,8 @@
 				C9AF216119C96B2600BAC331 /* RecordView.xib */,
 				C9AF216319C96B9D00BAC331 /* RecordView.h */,
 				C9AF216419C96B9D00BAC331 /* RecordView.m */,
+				C9D0D0741AC1036400A7F17E /* test123.h */,
+				C9D0D0751AC1036400A7F17E /* test123.m */,
 				C9EBDEF619C69EDA00D8086E /* Images.xcassets */,
 				C9BD445F19C832A500B6DBDB /* Model */,
 				C9EBDEE219C69ED900D8086E /* Supporting Files */,
@@ -305,6 +310,7 @@
 			files = (
 				C9EBDEF519C69ED900D8086E /* ViewController.m in Sources */,
 				C9AF216519C96B9D00BAC331 /* RecordView.m in Sources */,
+				C9D0D0761AC1036400A7F17E /* test123.m in Sources */,
 				C9EBDEEC19C69ED900D8086E /* AppDelegate.m in Sources */,
 				C966D5191A1EDCD000D533CB /* Records.xcdatamodeld in Sources */,
 				C966D5161A1EDCAF00D533CB /* Records.m in Sources */,
