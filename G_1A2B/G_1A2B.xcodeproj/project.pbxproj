@@ -7,8 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		C966D5151A1EDCAF00D533CB /* EntityControl.m in Sources */ = {isa = PBXBuildFile; fileRef = C966D5121A1EDCAF00D533CB /* EntityControl.m */; };
-		C966D5161A1EDCAF00D533CB /* Records.m in Sources */ = {isa = PBXBuildFile; fileRef = C966D5141A1EDCAF00D533CB /* Records.m */; };
+		C95CADFA1AD6598C00D2B1B6 /* EntityControl.m in Sources */ = {isa = PBXBuildFile; fileRef = C95CADF71AD6598C00D2B1B6 /* EntityControl.m */; };
+		C95CADFB1AD6598C00D2B1B6 /* Records.m in Sources */ = {isa = PBXBuildFile; fileRef = C95CADF91AD6598C00D2B1B6 /* Records.m */; };
 		C966D5191A1EDCD000D533CB /* Records.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = C966D5171A1EDCD000D533CB /* Records.xcdatamodeld */; };
 		C9AF216219C96B2600BAC331 /* RecordView.xib in Resources */ = {isa = PBXBuildFile; fileRef = C9AF216119C96B2600BAC331 /* RecordView.xib */; };
 		C9AF216519C96B9D00BAC331 /* RecordView.m in Sources */ = {isa = PBXBuildFile; fileRef = C9AF216419C96B9D00BAC331 /* RecordView.m */; };
@@ -43,10 +43,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		C966D5111A1EDCAF00D533CB /* EntityControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EntityControl.h; path = Model/EntityControl.h; sourceTree = "<group>"; };
-		C966D5121A1EDCAF00D533CB /* EntityControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EntityControl.m; path = Model/EntityControl.m; sourceTree = "<group>"; };
-		C966D5131A1EDCAF00D533CB /* Records.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Records.h; path = Model/Records.h; sourceTree = "<group>"; };
-		C966D5141A1EDCAF00D533CB /* Records.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Records.m; path = Model/Records.m; sourceTree = "<group>"; };
+		C95CADF61AD6598C00D2B1B6 /* EntityControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EntityControl.h; path = Model/EntityControl.h; sourceTree = "<group>"; };
+		C95CADF71AD6598C00D2B1B6 /* EntityControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EntityControl.m; path = Model/EntityControl.m; sourceTree = "<group>"; };
+		C95CADF81AD6598C00D2B1B6 /* Records.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Records.h; path = Model/Records.h; sourceTree = "<group>"; };
+		C95CADF91AD6598C00D2B1B6 /* Records.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Records.m; path = Model/Records.m; sourceTree = "<group>"; };
 		C966D5181A1EDCD000D533CB /* Records.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Records.xcdatamodel; sourceTree = "<group>"; };
 		C9AF216119C96B2600BAC331 /* RecordView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RecordView.xib; sourceTree = "<group>"; };
 		C9AF216319C96B9D00BAC331 /* RecordView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RecordView.h; sourceTree = "<group>"; };
@@ -102,6 +102,17 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		C95CADF51AD6597200D2B1B6 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				C95CADF61AD6598C00D2B1B6 /* EntityControl.h */,
+				C95CADF71AD6598C00D2B1B6 /* EntityControl.m */,
+				C95CADF81AD6598C00D2B1B6 /* Records.h */,
+				C95CADF91AD6598C00D2B1B6 /* Records.m */,
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
 		C9BD444C19C80B7500B6DBDB /* Sound */ = {
 			isa = PBXGroup;
 			children = (
@@ -109,17 +120,6 @@
 				C9BD446619C83BA100B6DBDB /* game_maoudamashii_5_village10.mp3 */,
 			);
 			name = Sound;
-			sourceTree = "<group>";
-		};
-		C9BD445F19C832A500B6DBDB /* Model */ = {
-			isa = PBXGroup;
-			children = (
-				C966D5111A1EDCAF00D533CB /* EntityControl.h */,
-				C966D5121A1EDCAF00D533CB /* EntityControl.m */,
-				C966D5131A1EDCAF00D533CB /* Records.h */,
-				C966D5141A1EDCAF00D533CB /* Records.m */,
-			);
-			name = Model;
 			sourceTree = "<group>";
 		};
 		C9EBDECF19C69ED900D8086E = {
@@ -166,7 +166,7 @@
 				C9AF216319C96B9D00BAC331 /* RecordView.h */,
 				C9AF216419C96B9D00BAC331 /* RecordView.m */,
 				C9EBDEF619C69EDA00D8086E /* Images.xcassets */,
-				C9BD445F19C832A500B6DBDB /* Model */,
+				C95CADF51AD6597200D2B1B6 /* Model */,
 				C9EBDEE219C69ED900D8086E /* Supporting Files */,
 				C9BD444C19C80B7500B6DBDB /* Sound */,
 			);
@@ -303,13 +303,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C95CADFA1AD6598C00D2B1B6 /* EntityControl.m in Sources */,
 				C9EBDEF519C69ED900D8086E /* ViewController.m in Sources */,
 				C9AF216519C96B9D00BAC331 /* RecordView.m in Sources */,
 				C9EBDEEC19C69ED900D8086E /* AppDelegate.m in Sources */,
 				C966D5191A1EDCD000D533CB /* Records.xcdatamodeld in Sources */,
-				C966D5161A1EDCAF00D533CB /* Records.m in Sources */,
-				C966D5151A1EDCAF00D533CB /* EntityControl.m in Sources */,
 				C9EBDEE819C69ED900D8086E /* main.m in Sources */,
+				C95CADFB1AD6598C00D2B1B6 /* Records.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
