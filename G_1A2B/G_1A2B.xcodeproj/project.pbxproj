@@ -11,6 +11,7 @@
 		C95CADFB1AD6598C00D2B1B6 /* Records.m in Sources */ = {isa = PBXBuildFile; fileRef = C95CADF91AD6598C00D2B1B6 /* Records.m */; };
 		C95CAE041AD65A3F00D2B1B6 /* ButtonTap.wav in Resources */ = {isa = PBXBuildFile; fileRef = C95CAE021AD65A3F00D2B1B6 /* ButtonTap.wav */; };
 		C95CAE051AD65A3F00D2B1B6 /* game_maoudamashii_5_village10.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = C95CAE031AD65A3F00D2B1B6 /* game_maoudamashii_5_village10.mp3 */; };
+		C95CAE081AD65B1E00D2B1B6 /* icon_clean.png in Resources */ = {isa = PBXBuildFile; fileRef = C95CAE071AD65B1E00D2B1B6 /* icon_clean.png */; };
 		C966D5191A1EDCD000D533CB /* Records.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = C966D5171A1EDCD000D533CB /* Records.xcdatamodeld */; };
 		C9AF216219C96B2600BAC331 /* RecordView.xib in Resources */ = {isa = PBXBuildFile; fileRef = C9AF216119C96B2600BAC331 /* RecordView.xib */; };
 		C9AF216519C96B9D00BAC331 /* RecordView.m in Sources */ = {isa = PBXBuildFile; fileRef = C9AF216419C96B9D00BAC331 /* RecordView.m */; };
@@ -49,6 +50,7 @@
 		C95CADF91AD6598C00D2B1B6 /* Records.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Records.m; path = Model/Records.m; sourceTree = "<group>"; };
 		C95CAE021AD65A3F00D2B1B6 /* ButtonTap.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = ButtonTap.wav; sourceTree = "<group>"; };
 		C95CAE031AD65A3F00D2B1B6 /* game_maoudamashii_5_village10.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = game_maoudamashii_5_village10.mp3; sourceTree = "<group>"; };
+		C95CAE071AD65B1E00D2B1B6 /* icon_clean.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = icon_clean.png; path = Resource/Image/icon_clean.png; sourceTree = "<group>"; };
 		C966D5181A1EDCD000D533CB /* Records.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Records.xcdatamodel; sourceTree = "<group>"; };
 		C9AF216119C96B2600BAC331 /* RecordView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RecordView.xib; sourceTree = "<group>"; };
 		C9AF216319C96B9D00BAC331 /* RecordView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RecordView.h; sourceTree = "<group>"; };
@@ -123,6 +125,14 @@
 			path = Resource/Sound;
 			sourceTree = "<group>";
 		};
+		C95CAE061AD65AC600D2B1B6 /* Image */ = {
+			isa = PBXGroup;
+			children = (
+				C95CAE071AD65B1E00D2B1B6 /* icon_clean.png */,
+			);
+			name = Image;
+			sourceTree = "<group>";
+		};
 		C9EBDECF19C69ED900D8086E = {
 			isa = PBXGroup;
 			children = (
@@ -169,6 +179,7 @@
 				C9EBDEF619C69EDA00D8086E /* Images.xcassets */,
 				C95CAE011AD65A3F00D2B1B6 /* Sound */,
 				C95CADF51AD6597200D2B1B6 /* Model */,
+				C95CAE061AD65AC600D2B1B6 /* Image */,
 				C9EBDEE219C69ED900D8086E /* Supporting Files */,
 			);
 			path = G_1A2B;
@@ -282,6 +293,7 @@
 			files = (
 				C9EBDEF719C69EDA00D8086E /* Images.xcassets in Resources */,
 				C9EBDEEF19C69ED900D8086E /* Main_iPhone.storyboard in Resources */,
+				C95CAE081AD65B1E00D2B1B6 /* icon_clean.png in Resources */,
 				C9AF216219C96B2600BAC331 /* RecordView.xib in Resources */,
 				C95CAE041AD65A3F00D2B1B6 /* ButtonTap.wav in Resources */,
 				C95CAE051AD65A3F00D2B1B6 /* game_maoudamashii_5_village10.mp3 in Resources */,
