@@ -7,24 +7,46 @@
 //
 
 #import "ViewController.h"
+#import <AVFoundation/AVFoundation.h>
+#import "EntityControl.h"
+#import "RecordView.h"
 
-@interface ViewController ()
+@interface ViewController () <UITextFieldDelegate>
+{
+    int QuestionNumber;
+    int Acount;
+    int Bcount;
+    
+    NSTimer *timer;
+    NSInteger seconds;
+    NSInteger minutes;
+    
+    //Add AVAudioPlayer objects
+    AVAudioPlayer *ButtonBeep;
+    AVAudioPlayer *BackgroundMusic;
+
+}
+
+
+@property(retain,nonatomic)IBOutlet UILabel *messageLabel;
+@property(retain,nonatomic)IBOutlet UILabel *timeLabel;
+@property(retain,nonatomic)IBOutlet UITextField *answerText;
+@property(retain,nonatomic)IBOutlet UIButton *startButton;
+@property (strong, nonatomic) IBOutlet UIButton *historyButton;
+@property (strong, nonatomic) IBOutlet UIButton *guessButton;
 
 @end
 
 
 @implementation ViewController
 
-@synthesize MessageLabel = _MessageLabel;
-@synthesize TimeLabel = _TimeLabel;
-@synthesize AnswerText = _AnswerText;
-@synthesize StartButton = _StartButton;
-
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     
-    _AnswerText.delegate = self;
+    _answerText.delegate = self;
+    
+    [self adjustComponentsSkin];
     
     [self AudioPlayerSetting];
     [self startBackgroundMusic];
@@ -37,7 +59,22 @@
     // Dispose of any resources that can be recreated.
 }
 
-#pragma mark Setting Method
+#pragma mrak - components skin
+
+- (void)adjustComponentsSkin
+{
+    _startButton.layer.cornerRadius = 5.0;
+    _guessButton.layer.cornerRadius = 5.0;
+    
+    _historyButton.layer.cornerRadius = 22.0;
+    
+    _answerText.layer.cornerRadius = 5.0;
+    _answerText.layer.borderColor = [[UIColor grayColor] CGColor];
+    _answerText.layer.borderWidth = 1.0;
+}
+
+#pragma mark - Setting Method
+
 -(void)AudioPlayerSetting
 {
     ButtonBeep = [self setupAudioPlayerWithFile:@"ButtonTap" type:@"wav"];
@@ -50,11 +87,13 @@
     BackgroundMusic.numberOfLoops = -1;
     [BackgroundMusic play];
 }
-#pragma mark Button Action Method
+
+#pragma mark - Button Action Method
+
 -(IBAction)StartButtonPressed:(id)sender
 {
     QuestionNumber = [[self GenerateQuestionNumber]intValue];
-    _MessageLabel.text = @"Start!!";
+    _messageLabel.text = @"Game Start!!";
     
     NSLog(@"Question : %i",QuestionNumber);
     
@@ -65,23 +104,23 @@
     }
     
     [self timerStart];
-    [self.StartButton setTitle:@"Change question" forState:UIControlStateNormal];
+    [self.startButton setTitle:@"Change question" forState:UIControlStateNormal];
 }
 
 -(IBAction)GuessButtonPressed:(id)sender
 {
     if (QuestionNumber == 0) {
-        _MessageLabel.text = @"Please press the 'Start' button";
+        _messageLabel.text = @"Please press the 'Start' button";
         
     }else{
-        int AnswerNum = [_AnswerText.text intValue];
+        int AnswerNum = [_answerText.text intValue];
         Acount = 0;
         Bcount = 0;
     
         [self CalculateAandBCount:AnswerNum];
         
         if (Acount == 4) {
-            _MessageLabel.text = [NSString stringWithFormat:@"Congratulation! The number is %i.",AnswerNum];
+            _messageLabel.text = [NSString stringWithFormat:@"Congratulation! The number is %i.",AnswerNum];
             
             [timer invalidate];
             timer = nil;
@@ -89,7 +128,7 @@
             [self SaveResult];
             
         }else{
-            _MessageLabel.text = [NSString stringWithFormat:@"%iA%iB",Acount,Bcount];
+            _messageLabel.text = [NSString stringWithFormat:@"%iA%iB",Acount,Bcount];
         }
         
     }
@@ -102,7 +141,8 @@
     [self.view addSubview:recordview];
 }
 
-#pragma mark Random Method
+#pragma mark - Random Method
+
 -(int)GetQuestionNumber
 {
     int QuestionNum = arc4random() % 10000;
@@ -110,7 +150,7 @@
     return QuestionNum;
 }
 
-#pragma mark Precess Number Method
+#pragma mark - Precess Number Method
 
 -(NSString *)GenerateQuestionNumber
 {
@@ -144,15 +184,17 @@
 }
 
 
-#pragma mark EndGame Methods
+#pragma mark - EndGame Methods
+
 -(void)SaveResult
 {
-    NSDictionary *DataDic =@{@"Answer":_AnswerText.text,@"Time":_TimeLabel.text};
+    NSDictionary *DataDic =@{@"Answer":_answerText.text,@"Time":_timeLabel.text};
     
     [[EntityControl shareEntityControl] InsertNewRecord:DataDic];
 }
 
 #pragma mark TextField Delegate
+
 -(BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
 {
     //limit 4 words.
@@ -163,20 +205,21 @@
     }
 }
 
-#pragma mark TouchesEvent
+#pragma mark - TouchesEvent
 
 -(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
 {
-    [_AnswerText resignFirstResponder];
+    [_answerText resignFirstResponder];
 }
 
-#pragma mark Timer
+#pragma mark - Timer
+
 -(void)timerStart
 {
     seconds = 0;
     minutes = 0;
     
-    _TimeLabel.text = [NSString stringWithFormat:@"%02ld:%02ld",(long)minutes,(long)seconds];
+    _timeLabel.text = [NSString stringWithFormat:@"%02ld:%02ld",(long)minutes,(long)seconds];
     
     timer = [NSTimer scheduledTimerWithTimeInterval:1.0f target:self selector:@selector(additionTime) userInfo:nil repeats:YES];
 }
@@ -190,10 +233,11 @@
         seconds = 0;
     }
     
-    _TimeLabel.text = [NSString stringWithFormat:@"%02ld:%02ld",(long)minutes,(long)seconds];
+    _timeLabel.text = [NSString stringWithFormat:@"%02ld:%02ld",(long)minutes,(long)seconds];
 }
 
-#pragma mark AudioPlayer
+#pragma mark - AudioPlayer
+
 -(AVAudioPlayer *)setupAudioPlayerWithFile:(NSString *)file type:(NSString *)type
 {
     NSString *path = [[NSBundle mainBundle] pathForResource:file ofType:type];
