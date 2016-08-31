@@ -11,5 +11,5 @@ Button Tap : http://www.raywenderlich.com Tutorials
 
 Screenshots
 ===========
-![Screenshots](./img/001.png)
-![Screenshots](./img/002.png)
+![Screenshots](./Img/001.png)
+![Screenshots](./Img/002.png)
