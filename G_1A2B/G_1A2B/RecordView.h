@@ -7,16 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "EntityControl.h"
 
-@interface RecordView : UIView <UITableViewDataSource,UIAlertViewDelegate>
-{
-    NSArray *RecordsArr;
-}
+@interface RecordView : UIView 
 
-@property(retain,nonatomic)IBOutlet UITableView *RecordsTableV;
-
-- (id) initCenterPoint:(CGPoint)CenterPoint;
+- (instancetype)initWithFrame:(CGRect)frame owner:(id)owner;
 
 
 @end

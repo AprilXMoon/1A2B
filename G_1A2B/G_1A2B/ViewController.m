@@ -16,6 +16,7 @@
     int QuestionNumber;
     int Acount;
     int Bcount;
+    int guessCount;
     
     NSTimer *timer;
     NSInteger seconds;
@@ -24,7 +25,9 @@
     //Add AVAudioPlayer objects
     AVAudioPlayer *ButtonBeep;
     AVAudioPlayer *BackgroundMusic;
-
+    
+    NSArray *questionArray;
+    NSArray *answerArray;
 }
 
 
@@ -34,6 +37,7 @@
 @property(retain,nonatomic)IBOutlet UIButton *startButton;
 @property (strong, nonatomic) IBOutlet UIButton *historyButton;
 @property (strong, nonatomic) IBOutlet UIButton *guessButton;
+@property (strong, nonatomic) IBOutlet UITextView *guessHistory;
 
 @end
 
@@ -45,6 +49,7 @@
     [super viewDidLoad];
     
     _answerText.delegate = self;
+    guessCount = 1;
     
     [self adjustComponentsSkin];
     
@@ -59,6 +64,13 @@
     // Dispose of any resources that can be recreated.
 }
 
+- (void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    
+    [self adjustButtonColor];
+}
+
 #pragma mrak - components skin
 
 - (void)adjustComponentsSkin
@@ -71,6 +83,32 @@
     _answerText.layer.cornerRadius = 5.0;
     _answerText.layer.borderColor = [[UIColor grayColor] CGColor];
     _answerText.layer.borderWidth = 1.0;
+}
+
+- (void)adjustButtonColor
+{
+    NSArray *startButtonColors = @[(id)[[UIColor colorWithRed:1.0 green:0.7562 blue:0.4366 alpha:1.0] CGColor],
+                                   (id)[[UIColor colorWithRed:1.0 green:0.622 blue:0.2347 alpha:1.0] CGColor]];
+    CAGradientLayer *startGradient = [self createGradientColorLayer: startButtonColors colorRange: _startButton.bounds];
+    
+    [_startButton.layer insertSublayer:startGradient atIndex:0];
+    _startButton.clipsToBounds = YES;
+    
+    NSArray *guessButtonColors = @[(id)[[UIColor colorWithRed:0.5539 green:0.7476 blue:0.9939 alpha:1.0] CGColor],
+                                   (id)[[UIColor colorWithRed:0.2103 green:0.4503 blue:0.9912 alpha:1.0] CGColor]];
+    CAGradientLayer *guessGradient = [self createGradientColorLayer: guessButtonColors colorRange:_guessButton.bounds];
+    
+    [_guessButton.layer insertSublayer:guessGradient atIndex:0];
+    _guessButton.clipsToBounds = YES;
+}
+
+- (CAGradientLayer *)createGradientColorLayer:(NSArray *)colors colorRange:(CGRect)range
+{
+    CAGradientLayer *gradient = [CAGradientLayer layer];
+    gradient.frame = range;
+    gradient.colors = colors;
+    
+    return gradient;
 }
 
 #pragma mark - Setting Method
@@ -92,8 +130,10 @@
 
 -(IBAction)StartButtonPressed:(id)sender
 {
-    QuestionNumber = [[self GenerateQuestionNumber]intValue];
+    QuestionNumber = [[self GenerateQuestionNumber] intValue];
     _messageLabel.text = @"Game Start!!";
+    guessCount = 1;
+    _guessHistory.text = @"";
     
     NSLog(@"Question : %i",QuestionNumber);
     
@@ -120,7 +160,7 @@
         [self CalculateAandBCount:AnswerNum];
         
         if (Acount == 4) {
-            _messageLabel.text = [NSString stringWithFormat:@"Congratulation! The number is %i.",AnswerNum];
+            _messageLabel.text = [NSString stringWithFormat:@"Congratulation! The number is %@.", _answerText.text];
             
             [timer invalidate];
             timer = nil;
@@ -128,17 +168,23 @@
             [self SaveResult];
             
         }else{
-            _messageLabel.text = [NSString stringWithFormat:@"%iA%iB",Acount,Bcount];
+            NSString *guessText = _guessHistory.text;
+            _guessHistory.text = [guessText stringByAppendingString:[NSString stringWithFormat:@"%i. %@ : %iA%iB \n",
+                                                                    guessCount, _answerText.text, Acount, Bcount]];
+            _guessHistory.font = [UIFont systemFontOfSize:20.0];
         }
-        
+        guessCount++;
     }
+    
+    _answerText.text = @"";
+    [_answerText resignFirstResponder];
 }
 
 -(IBAction)RecordButtonPressed:(id)sender
 {
-    RecordView *recordview = [[RecordView alloc]initCenterPoint:self.view.center];
+    RecordView *recordView = [[RecordView alloc] initWithFrame:self.view.bounds owner:self];
     
-    [self.view addSubview:recordview];
+    [self.view addSubview:recordView];
 }
 
 #pragma mark - Random Method
@@ -164,8 +210,8 @@
 -(void)CalculateAandBCount:(int)AnswerNumber
 {
     //A count
-    for (int N = 1; N <= 1000; N = N * 10) {
-        if ((QuestionNumber/N % 10) == (AnswerNumber/N % 10)) {
+    for (int idx = 1; idx <= 1000; idx = idx * 10) {
+        if (((QuestionNumber/idx) % 10) == ((AnswerNumber/idx) % 10)) {
             Acount ++;
         }
     }
@@ -204,6 +250,7 @@
         return YES;
     }
 }
+
 
 #pragma mark - TouchesEvent
 

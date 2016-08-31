@@ -7,38 +7,30 @@
 //
 
 #import "RecordView.h"
+#import "EntityControl.h"
+
+@interface RecordView () <UITableViewDataSource,UIAlertViewDelegate>
+{
+    NSArray *RecordsArr;
+}
+
+@property (retain,nonatomic) IBOutlet UITableView *RecordsTableV;
+@property (strong, nonatomic) IBOutlet UIView *contentView;
+
+@end
 
 @implementation RecordView
 
-@synthesize RecordsTableV = _RecordsTableV;
-
-- (id)initWithFrame:(CGRect)frame
+- (instancetype)initWithFrame:(CGRect)frame owner:(id)owner
 {
-    self = [super initWithFrame:frame];
+    self = [[[NSBundle mainBundle] loadNibNamed:@"RecordView" owner:owner options:nil] objectAtIndex:0];
     if (self) {
-        // Initialization code
-    }
-    return self;
-    //tset2
-}
-
-- (id) initCenterPoint:(CGPoint)CenterPoint
-{
-    UINib *nib = [UINib nibWithNibName:@"RecordView" bundle:nil];
-    NSArray * array;
-    array = [nib instantiateWithOwner:nil options:nil];
-    
-    self = (RecordView *) [array lastObject];
-    
-    if (self) {
-        self.autoresizingMask = UIViewAutoresizingNone;
-        self.center = CenterPoint;
-        
         RecordsArr = [[EntityControl shareEntityControl]GetAllRecords];
         self.RecordsTableV.dataSource = self;
-    
+        
+        _contentView.layer.cornerRadius = 5.0;
     }
-
+    
     return self;
 }
 
