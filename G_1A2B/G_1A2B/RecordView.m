@@ -28,7 +28,7 @@
         RecordsArr = [[EntityControl shareEntityControl]GetAllRecords];
         self.RecordsTableV.dataSource = self;
         
-        _contentView.layer.cornerRadius = 5.0;
+        [self viewskin];
     }
     
     return self;
@@ -43,7 +43,24 @@
 }
 */
 
-#pragma mark Button Action
+#pragma mark - view skin
+
+- (void)viewskin
+{
+    NSArray *colors = @[ (id)[[UIColor colorWithRed:0.9757 green:1.0 blue:0.6802 alpha:1.0] CGColor],
+                        (id)[[UIColor colorWithRed:0.9906 green:0.8731 blue:0.6414 alpha:1.0] CGColor]];
+    
+    CAGradientLayer *viewlayer = [CAGradientLayer layer];
+    viewlayer.colors = colors;
+    viewlayer.frame = _contentView.bounds;
+    
+    [_contentView.layer insertSublayer:viewlayer atIndex:0];
+    
+     _contentView.layer.cornerRadius = 5.0;
+     _contentView.clipsToBounds = YES;
+}
+
+#pragma mark - Button Action
 
 -(IBAction)CancelBtnPressed:(id)sender
 {
@@ -57,7 +74,8 @@
     [DeleteAlertView show];
 }
 
-#pragma mark AlertView Delegate
+#pragma mark - AlertView Delegate
+
 -(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
     if (buttonIndex == 1) {
@@ -68,11 +86,11 @@
     }
 }
 
-#pragma mark Records TableView DataSource
+#pragma mark - Records TableView DataSource
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return RecordsArr.count;
+    return RecordsArr.count + 1;
 }
 
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
@@ -85,11 +103,19 @@
     static NSString *cellNameIdentifier = @"RecordsCell";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellNameIdentifier];
     if (!cell) {
-        cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellNameIdentifier];
-        
-        Records *record = [RecordsArr objectAtIndex:indexPath.row];
-        cell.textLabel.text = [NSString stringWithFormat:@"Answer:%@    Time:%@",record.answer,record.time];
+        cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:cellNameIdentifier];
+        cell.backgroundColor = [UIColor clearColor];
+        cell.detailTextLabel.textColor = [UIColor grayColor];
         [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
+    }
+    
+    if (indexPath.row == 0) {
+        cell.textLabel.text = @"Question";
+        cell.detailTextLabel.text = @"spend time.";
+    } else {
+        Records *record = [RecordsArr objectAtIndex:indexPath.row-1];
+        cell.textLabel.text = record.answer;
+        cell.detailTextLabel.text = record.time;
     }
     
     return cell;
