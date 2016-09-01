@@ -1,6 +1,5 @@
 #1A2B
 
-
 Practice Object - Game 1A2B
 
 ##Music
@@ -20,5 +19,6 @@ Button Tap : http://www.raywenderlich.com Tutorials
 * only support Portrait
 * UI optimal
 * modify calculation logic
+* add "Give up" Button
 
 # Have fun!
