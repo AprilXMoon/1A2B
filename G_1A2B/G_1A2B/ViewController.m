@@ -52,6 +52,7 @@
     // Do any additional setup after loading the view, typically from a nib.
     [self settingDefaultValue];
     [self adjustComponentsSkin];
+    [self addInputAccessoryView];
     [self AudioPlayerSetting];
     [self startBackgroundMusic];
 }
@@ -135,6 +136,19 @@
     answerArray = [NSMutableArray array];
 }
 
+- (void)addInputAccessoryView
+{
+    UIToolbar *keyboardDoneView = [[UIToolbar alloc] init];
+    [keyboardDoneView sizeToFit];
+    
+    UIBarButtonItem *doneButton = [[UIBarButtonItem alloc] initWithTitle:@"Done" style:UIBarButtonItemStyleDone
+                                                                  target:self action:@selector(donePressed:)];
+    
+    [keyboardDoneView setItems:@[doneButton]];
+    _answerText.inputAccessoryView = keyboardDoneView;
+}
+
+
 #pragma mark - Button Action Method
 
 -(IBAction)StartButtonPressed:(id)sender
@@ -163,7 +177,12 @@
 {
     if (QuestionNumber == NSNotFound) {
         _messageLabel.text = @"You don't start play the game! Please press the 'Start' button";
-    }else{
+    } else if ([_answerText.text isEqualToString:@""]) {
+        _messageLabel.text = @"where is your answer?";
+    } else if (_answerText.text.length < 4) {
+        _messageLabel.text = @"Your answer isn't enough.";
+        return;
+    } else {
         int AnswerNum = [_answerText.text intValue];
         [self setNumberArray:answerArray number:AnswerNum];
     
@@ -199,6 +218,11 @@
 - (IBAction)giveUpButtonPressed:(id)sender
 {
     [self giveUPTheGame];
+}
+
+- (void)donePressed:(id)sender
+{
+    [self.view endEditing:YES];
 }
 
 #pragma mark - Geme end.
