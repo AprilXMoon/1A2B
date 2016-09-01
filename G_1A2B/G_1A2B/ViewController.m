@@ -26,8 +26,8 @@
     AVAudioPlayer *ButtonBeep;
     AVAudioPlayer *BackgroundMusic;
     
-    NSArray *questionArray;
-    NSArray *answerArray;
+    NSMutableArray *questionArray;
+    NSMutableArray *answerArray;
 }
 
 
@@ -47,15 +47,11 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
-    _answerText.delegate = self;
-    guessCount = 1;
-    
+    // Do any additional setup after loading the view, typically from a nib.
+    [self settingDefaultValue];
     [self adjustComponentsSkin];
-    
     [self AudioPlayerSetting];
     [self startBackgroundMusic];
-	// Do any additional setup after loading the view, typically from a nib.
 }
 
 - (void)didReceiveMemoryWarning
@@ -72,7 +68,6 @@
 }
 
 #pragma mrak - components skin
-
 - (void)adjustComponentsSkin
 {
     _startButton.layer.cornerRadius = 5.0;
@@ -113,65 +108,67 @@
 
 #pragma mark - Setting Method
 
--(void)AudioPlayerSetting
+- (void)AudioPlayerSetting
 {
     ButtonBeep = [self setupAudioPlayerWithFile:@"ButtonTap" type:@"wav"];
     BackgroundMusic = [self setupAudioPlayerWithFile:@"game_maoudamashii_5_village10" type:@"mp3"];
 }
 
--(void)startBackgroundMusic
+- (void)startBackgroundMusic
 {
     [BackgroundMusic setVolume:0.3];
     BackgroundMusic.numberOfLoops = -1;
     [BackgroundMusic play];
 }
 
+- (void)settingDefaultValue
+{
+    _answerText.delegate = self;
+    
+    guessCount = 1;
+    
+    questionArray = [NSMutableArray array];
+    answerArray = [NSMutableArray array];
+}
+
 #pragma mark - Button Action Method
 
 -(IBAction)StartButtonPressed:(id)sender
 {
-    QuestionNumber = [[self GenerateQuestionNumber] intValue];
+    [self setGameStartValue];
+    
+    [ButtonBeep play];
+    [self startTimer];
+    [_startButton setTitle:@"Change question" forState:UIControlStateNormal];
+}
+
+- (void)setGameStartValue
+{
+    QuestionNumber = [self GetQuestionNumber];
+    
+    [self setNumberArray:questionArray number:QuestionNumber];
+    
     _messageLabel.text = @"Game Start!!";
     guessCount = 1;
     _guessHistory.text = @"";
     
     NSLog(@"Question : %i",QuestionNumber);
-    
-    [ButtonBeep play];
-    if (timer) {
-        [timer invalidate];
-        timer = nil;
-    }
-    
-    [self timerStart];
-    [self.startButton setTitle:@"Change question" forState:UIControlStateNormal];
 }
 
 -(IBAction)GuessButtonPressed:(id)sender
 {
     if (QuestionNumber == 0) {
         _messageLabel.text = @"Please press the 'Start' button";
-        
     }else{
         int AnswerNum = [_answerText.text intValue];
-        Acount = 0;
-        Bcount = 0;
+        [self setNumberArray:answerArray number:AnswerNum];
     
         [self CalculateAandBCount:AnswerNum];
         
         if (Acount == 4) {
-            _messageLabel.text = [NSString stringWithFormat:@"Congratulation! The number is %@.", _answerText.text];
-            
-            [timer invalidate];
-            timer = nil;
-            
-            [self SaveResult];
-            
+            [self gameTheEnd];
         }else{
-            NSString *guessText = _guessHistory.text;
-            _guessHistory.text = [guessText stringByAppendingString:[NSString stringWithFormat:@"%i. %@ : %iA%iB \n",
-                                                                    guessCount, _answerText.text, Acount, Bcount]];
-            _guessHistory.font = [UIFont systemFontOfSize:20.0];
+            [self changeGuessHistoryRecord];
         }
         guessCount++;
     }
@@ -180,11 +177,28 @@
     [_answerText resignFirstResponder];
 }
 
+- (void)changeGuessHistoryRecord
+{
+    NSString *guessText = _guessHistory.text;
+    _guessHistory.text = [guessText stringByAppendingString:[NSString stringWithFormat:@"%i. %@ : %iA%iB \n",
+                                                             guessCount, _answerText.text, Acount, Bcount]];
+    _guessHistory.font = [UIFont systemFontOfSize:20.0];
+}
+
 -(IBAction)RecordButtonPressed:(id)sender
 {
     RecordView *recordView = [[RecordView alloc] initWithFrame:self.view.bounds owner:self];
     
     [self.view addSubview:recordView];
+}
+
+- (void)gameTheEnd
+{
+    _messageLabel.text = [NSString stringWithFormat:@"Congratulation! The number is %@.", _answerText.text];
+    [_startButton setTitle:@"Start!" forState:UIControlStateNormal];
+    
+    [self stopTimer];
+    [self SaveResult];
 }
 
 #pragma mark - Random Method
@@ -198,6 +212,15 @@
 
 #pragma mark - Precess Number Method
 
+- (void)setNumberArray:(NSMutableArray *)numberArray number:(int)number
+{
+    [numberArray removeAllObjects];
+    
+    for (int idx = 1000 ; idx >= 1; idx = (idx / 10)) {
+        [numberArray addObject:[NSNumber numberWithInt:((number/idx) %10)]];
+    }
+}
+
 -(NSString *)GenerateQuestionNumber
 {
     int QueNum = [self GetQuestionNumber];
@@ -209,21 +232,29 @@
 
 -(void)CalculateAandBCount:(int)AnswerNumber
 {
+    Acount = 0;
+    Bcount = 0;
+    
+    NSMutableArray *compareArray = [NSMutableArray arrayWithArray:questionArray];
+    
     //A count
-    for (int idx = 1; idx <= 1000; idx = idx * 10) {
-        if (((QuestionNumber/idx) % 10) == ((AnswerNumber/idx) % 10)) {
-            Acount ++;
+    for (int idx = 0; idx < compareArray.count; idx++) {
+        if (compareArray[idx] == answerArray[idx]) {
+            Acount++;
+            [compareArray removeObjectAtIndex:idx];
+            [answerArray removeObjectAtIndex:idx];
+            idx--;
         }
     }
     
-    //B count
-    for (int QueN = 1 ; QueN <= 1000; QueN = QueN * 10) {
-        for (int AnsN = 1; AnsN <= 1000; AnsN = AnsN * 10) {
-            if (QueN == AnsN) {
-                AnsN = AnsN * 10;
-            }
-            if ((QuestionNumber/QueN % 10) == (AnswerNumber/AnsN % 10)) {
-                Bcount ++;
+    for (int ansIdx = 0; ansIdx < answerArray.count; ansIdx++) {
+        for (int pareIdx = 0; pareIdx < compareArray.count; pareIdx++) {
+            if(answerArray[ansIdx] == compareArray[pareIdx]) {
+                Bcount++;
+                [compareArray removeObjectAtIndex:pareIdx];
+                [answerArray removeObjectAtIndex:ansIdx];
+                ansIdx--;
+                break;
             }
         }
     }
@@ -251,7 +282,6 @@
     }
 }
 
-
 #pragma mark - TouchesEvent
 
 -(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
@@ -260,6 +290,23 @@
 }
 
 #pragma mark - Timer
+
+- (void)startTimer
+{
+    if (timer) {
+        [timer invalidate];
+        timer = nil;
+    }
+    
+    [self timerStart];
+}
+
+- (void)stopTimer
+{
+    [timer invalidate];
+    timer = nil;
+    
+}
 
 -(void)timerStart
 {
