@@ -13,7 +13,7 @@
 
 @interface ViewController () <UITextFieldDelegate>
 {
-    int QuestionNumber;
+    NSInteger QuestionNumber;
     int Acount;
     int Bcount;
     int guessCount;
@@ -34,10 +34,12 @@
 @property(retain,nonatomic)IBOutlet UILabel *messageLabel;
 @property(retain,nonatomic)IBOutlet UILabel *timeLabel;
 @property(retain,nonatomic)IBOutlet UITextField *answerText;
+@property (strong, nonatomic) IBOutlet UITextView *guessHistory;
+
 @property(retain,nonatomic)IBOutlet UIButton *startButton;
 @property (strong, nonatomic) IBOutlet UIButton *historyButton;
 @property (strong, nonatomic) IBOutlet UIButton *guessButton;
-@property (strong, nonatomic) IBOutlet UITextView *guessHistory;
+@property (strong, nonatomic) IBOutlet UIButton *giveUpButton;
 
 @end
 
@@ -74,6 +76,7 @@
     _guessButton.layer.cornerRadius = 5.0;
     
     _historyButton.layer.cornerRadius = 22.0;
+    _giveUpButton.layer.cornerRadius = 22.0;
     
     _answerText.layer.cornerRadius = 5.0;
     _answerText.layer.borderColor = [[UIColor grayColor] CGColor];
@@ -126,6 +129,7 @@
     _answerText.delegate = self;
     
     guessCount = 1;
+    QuestionNumber = NSNotFound;
     
     questionArray = [NSMutableArray array];
     answerArray = [NSMutableArray array];
@@ -146,19 +150,19 @@
 {
     QuestionNumber = [self GetQuestionNumber];
     
-    [self setNumberArray:questionArray number:QuestionNumber];
+    [self setNumberArray:questionArray number:(int)QuestionNumber];
     
     _messageLabel.text = @"Game Start!!";
     guessCount = 1;
     _guessHistory.text = @"";
     
-    NSLog(@"Question : %i",QuestionNumber);
+    NSLog(@"Question : %li",(long)QuestionNumber);
 }
 
 -(IBAction)GuessButtonPressed:(id)sender
 {
-    if (QuestionNumber == 0) {
-        _messageLabel.text = @"Please press the 'Start' button";
+    if (QuestionNumber == NSNotFound) {
+        _messageLabel.text = @"You don't start play the game! Please press the 'Start' button";
     }else{
         int AnswerNum = [_answerText.text intValue];
         [self setNumberArray:answerArray number:AnswerNum];
@@ -166,7 +170,7 @@
         [self CalculateAandBCount:AnswerNum];
         
         if (Acount == 4) {
-            [self gameTheEnd];
+            [self winTheGame];
         }else{
             [self changeGuessHistoryRecord];
         }
@@ -192,13 +196,40 @@
     [self.view addSubview:recordView];
 }
 
-- (void)gameTheEnd
+- (IBAction)giveUpButtonPressed:(id)sender
 {
-    _messageLabel.text = [NSString stringWithFormat:@"Congratulation! The number is %@.", _answerText.text];
+    [self giveUPTheGame];
+}
+
+#pragma mark - Geme end.
+
+- (void)giveUPTheGame
+{
+    if (QuestionNumber == NSNotFound) {
+        _messageLabel.text = @"You don't start play the game!";
+        return;
+    }
+    
+    NSString *giveUpMessage = [NSString stringWithFormat:@"Hey! You give up? OK. \nThe answer is : %04ld", (long)QuestionNumber];
+    
+    [self gameTheEnd:giveUpMessage];
+    [self resetTimeLabel];
+}
+
+- (void)winTheGame
+{
+    NSString *winMessage = [NSString stringWithFormat:@"Congratulation! The number is %@.", _answerText.text];
+    
+    [self gameTheEnd:winMessage];
+    [self SaveResult];
+}
+
+- (void)gameTheEnd:(NSString *)message
+{
+    _messageLabel.text = message;
     [_startButton setTitle:@"Start!" forState:UIControlStateNormal];
     
     [self stopTimer];
-    [self SaveResult];
 }
 
 #pragma mark - Random Method
@@ -219,15 +250,6 @@
     for (int idx = 1000 ; idx >= 1; idx = (idx / 10)) {
         [numberArray addObject:[NSNumber numberWithInt:((number/idx) %10)]];
     }
-}
-
--(NSString *)GenerateQuestionNumber
-{
-    int QueNum = [self GetQuestionNumber];
-    
-    NSString * QuestionNumStr = [NSString stringWithFormat:@"%04d",QueNum];
-    
-    return QuestionNumStr;
 }
 
 -(void)CalculateAandBCount:(int)AnswerNumber
@@ -305,16 +327,11 @@
 {
     [timer invalidate];
     timer = nil;
-    
 }
 
 -(void)timerStart
 {
-    seconds = 0;
-    minutes = 0;
-    
-    _timeLabel.text = [NSString stringWithFormat:@"%02ld:%02ld",(long)minutes,(long)seconds];
-    
+    [self resetTimeLabel];
     timer = [NSTimer scheduledTimerWithTimeInterval:1.0f target:self selector:@selector(additionTime) userInfo:nil repeats:YES];
 }
 
@@ -326,6 +343,14 @@
         minutes++;
         seconds = 0;
     }
+    
+    _timeLabel.text = [NSString stringWithFormat:@"%02ld:%02ld",(long)minutes,(long)seconds];
+}
+
+- (void)resetTimeLabel
+{
+    seconds = 0;
+    minutes = 0;
     
     _timeLabel.text = [NSString stringWithFormat:@"%02ld:%02ld",(long)minutes,(long)seconds];
 }
