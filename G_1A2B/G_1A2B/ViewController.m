@@ -250,9 +250,12 @@
 
 - (void)gameTheEnd:(NSString *)message
 {
-    _messageLabel.text = message;
-    [_startButton setTitle:@"Start!" forState:UIControlStateNormal];
+    NSString *history = _guessHistory.text;
     
+    _messageLabel.text = message;
+    _guessHistory.text = [history stringByAppendingString:@"🍻,Congratulation!"];
+    
+    [_startButton setTitle:@"Start!" forState:UIControlStateNormal];
     [self stopTimer];
 }
 
